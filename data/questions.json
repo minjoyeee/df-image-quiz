@@ -98,5 +98,15 @@
     "id": 20,
     "image_path": "https://via.placeholder.com/400x400?text=에바",
     "answer": "에바"
+  },
+  {
+    "id": 21,
+    "image_path": "https://via.placeholder.com/400x400?text=아크",
+    "answer": "아크"
+  },
+  {
+    "id": 22,
+    "image_path": "https://via.placeholder.com/400x400?text=베아르",
+    "answer": "베아르"
   }
 ]
