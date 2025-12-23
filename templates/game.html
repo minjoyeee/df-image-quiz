@@ -92,6 +92,13 @@
             <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
                 <h2 class="text-xl font-bold text-gray-800 mb-4">힌트를 보시겠습니까?</h2>
                 <p class="text-gray-600 mb-6">힌트를 사용하면 이 문제의 정답은 50점으로 계산됩니다.</p>
+                
+                <!-- ✨ 힌트 표시 영역 -->
+                <div id="hintDisplay" class="hidden bg-yellow-100 p-4 rounded-lg mb-6 text-center">
+                    <p class="text-sm text-gray-600 mb-2">힌트:</p>
+                    <p id="hintText" class="text-2xl font-bold text-yellow-700"></p>
+                </div>
+
                 <div class="flex gap-4">
                     <button
                         type="button"
@@ -105,7 +112,7 @@
                         id="cancelHintBtn"
                         class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg transition"
                     >
-                        취소
+                        닫기
                     </button>
                 </div>
             </div>
@@ -252,18 +259,22 @@
 
         document.getElementById('confirmHintBtn').addEventListener('click', () => {
             const question = gameState.questions[gameState.currentIndex];
-            const answer = question.answer || '';
+            const answer = question?.answer || '';
             
             if (!answer) {
-                alert('오류: 문제를 찾을 수 없습니다.');
+                alert('오류: 정답 데이터가 없습니다.');
                 return;
             }
             
             const hint = getChosungHint(answer);
-
-            alert(`힌트: ${hint}`);
+            
+            // ✨ alert 대신 화면에 표시
+            document.getElementById('hintText').textContent = hint;
+            document.getElementById('hintDisplay').classList.remove('hidden');
+            document.getElementById('confirmHintBtn').disabled = true;
+            document.getElementById('confirmHintBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            
             gameState.hintUsed = true;
-            document.getElementById('hintModal').classList.add('hidden');
             updateHintButton();
         });
 
