@@ -50,10 +50,6 @@ def get_questions():
     # 전체 100개 중 랜덤 20개 선택
     selected_questions = random.sample(questions, 20)
     
-    # 정답은 클라이언트에 보내지 않음 (보안)
-    for q in selected_questions:
-        q.pop('answer', None)
-    
     return jsonify(selected_questions)
 
 
