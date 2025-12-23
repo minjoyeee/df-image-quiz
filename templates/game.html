@@ -246,7 +246,13 @@
 
         document.getElementById('confirmHintBtn').addEventListener('click', () => {
             const question = gameState.questions[gameState.currentIndex];
-            const answer = question.answer;
+            const answer = question.answer || '';
+            
+            if (!answer) {
+                alert('오류: 문제를 찾을 수 없습니다.');
+                return;
+            }
+            
             const hint = getChosungHint(answer);
 
             alert(`힌트: ${hint}`);
