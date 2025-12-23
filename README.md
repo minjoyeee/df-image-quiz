@@ -1,1 +1,0 @@
-# df-image-quiz
