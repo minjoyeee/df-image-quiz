@@ -227,15 +227,15 @@
         // ✨ 초성 추출 함수
         function getChosungHint(text) {
             const chosung = [
-                'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅄ',
-                'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+                'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ',
+                'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
             ];
             
             let hint = '';
             for (let char of text) {
                 const code = char.charCodeAt(0);
                 if (code >= 0xAC00 && code <= 0xD7A3) {
-                    const index = Math.floor((code - 0xAC00) / 28 / 21);
+                    const index = Math.floor((code - 0xAC00) / 588);
                     hint += chosung[index];
                 } else {
                     hint += char;
