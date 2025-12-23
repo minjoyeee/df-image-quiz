@@ -108,5 +108,10 @@
     "id": 22,
     "image_path": "https://via.placeholder.com/400x400?text=베아르",
     "answer": "베아르"
+  },
+  {
+    "id": 23,
+    "image_path": "https://via.placeholder.com/400x400?text=아이샤",
+    "answer": "아이샤"
   }
 ]
