@@ -1,117 +1,117 @@
 [
   {
     "id": 1,
-    "image_path": "https://via.placeholder.com/400x400?text=황금거미",
+    "image_path": "/static/images/test.png",
     "answer": "황금거미"
   },
   {
     "id": 2,
-    "image_path": "https://via.placeholder.com/400x400?text=검은이빨주술사",
+    "image_path": "/static/images/test.png",
     "answer": "검은이빨주술사"
   },
   {
     "id": 3,
-    "image_path": "https://via.placeholder.com/400x400?text=페리온",
+    "image_path": "/static/images/test.png",
     "answer": "페리온"
   },
   {
     "id": 4,
-    "image_path": "https://via.placeholder.com/400x400?text=악마의손",
+    "image_path": "/static/images/test.png",
     "answer": "악마의손"
   },
   {
     "id": 5,
-    "image_path": "https://via.placeholder.com/400x400?text=무한의나선",
+    "image_path": "/static/images/test.png",
     "answer": "무한의나선"
   },
   {
     "id": 6,
-    "image_path": "https://via.placeholder.com/400x400?text=데미지스킨",
+    "image_path": "/static/images/test.png",
     "answer": "데미지스킨"
   },
   {
     "id": 7,
-    "image_path": "https://via.placeholder.com/400x400?text=용의기운",
+    "image_path": "/static/images/test.png",
     "answer": "용의기운"
   },
   {
     "id": 8,
-    "image_path": "https://via.placeholder.com/400x400?text=오디움",
+    "image_path": "/static/images/test.png",
     "answer": "오디움"
   },
   {
     "id": 9,
-    "image_path": "https://via.placeholder.com/400x400?text=아바돈",
+    "image_path": "/static/images/test.png",
     "answer": "아바돈"
   },
   {
     "id": 10,
-    "image_path": "https://via.placeholder.com/400x400?text=데빌메이크라이",
+    "image_path": "/static/images/test.png",
     "answer": "데빌메이크라이"
   },
   {
     "id": 11,
-    "image_path": "https://via.placeholder.com/400x400?text=검은빛귀",
+    "image_path": "/static/images/test.png",
     "answer": "검은빛귀"
   },
   {
     "id": 12,
-    "image_path": "https://via.placeholder.com/400x400?text=타락한천사",
+    "image_path": "/static/images/test.png",
     "answer": "타락한천사"
   },
   {
     "id": 13,
-    "image_path": "https://via.placeholder.com/400x400?text=헬머신",
+    "image_path": "/static/images/test.png",
     "answer": "헬머신"
   },
   {
     "id": 14,
-    "image_path": "https://via.placeholder.com/400x400?text=흑마법사",
+    "image_path": "/static/images/test.png",
     "answer": "흑마법사"
   },
   {
     "id": 15,
-    "image_path": "https://via.placeholder.com/400x400?text=죽음의기사",
+    "image_path": "/static/images/test.png",
     "answer": "죽음의기사"
   },
   {
     "id": 16,
-    "image_path": "https://via.placeholder.com/400x400?text=베른하르드",
+    "image_path": "/static/images/test.png",
     "answer": "베른하르드"
   },
   {
     "id": 17,
-    "image_path": "https://via.placeholder.com/400x400?text=로렌",
+    "image_path": "/static/images/test.png",
     "answer": "로렌"
   },
   {
     "id": 18,
-    "image_path": "https://via.placeholder.com/400x400?text=헬토피아",
+    "image_path": "/static/images/test.png",
     "answer": "헬토피아"
   },
   {
     "id": 19,
-    "image_path": "https://via.placeholder.com/400x400?text=카인",
+    "image_path": "/static/images/test.png",
     "answer": "카인"
   },
   {
     "id": 20,
-    "image_path": "https://via.placeholder.com/400x400?text=에바",
+    "image_path": "/static/images/test.png",
     "answer": "에바"
   },
   {
     "id": 21,
-    "image_path": "https://via.placeholder.com/400x400?text=아크",
+    "image_path": "/static/images/test.png",
     "answer": "아크"
   },
   {
     "id": 22,
-    "image_path": "https://via.placeholder.com/400x400?text=베아르",
+    "image_path": "/static/images/test.png",
     "answer": "베아르"
   },
   {
     "id": 23,
-    "image_path": "https://via.placeholder.com/400x400?text=아이샤",
+    "image_path": "/static/images/test.png",
     "answer": "아이샤"
   }
 ]
