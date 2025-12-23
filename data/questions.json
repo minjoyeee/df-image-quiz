@@ -1,27 +1,27 @@
 [
   {
     "id": 1,
-    "image_path": "/static/images/test.png",
+    "image_path": "/static/images/솔도로스.jpeg",
     "answer": "솔도로스"
   },
   {
     "id": 2,
-    "image_path": "/static/images/test.png",
+    "image_path": "/static/images/디레지에.jpeg",
     "answer": "디레지에"
   },
   {
     "id": 3,
-    "image_path": "/static/images/test.png",
+    "image_path": "/static/images/단진.jpeg",
     "answer": "단진"
   },
   {
     "id": 4,
-    "image_path": "/static/images/test.png",
+    "image_path": "/static/images/관리자베르데.png",
     "answer": "관리자베르데"
   },
   {
     "id": 5,
-    "image_path": "/static/images/test.png",
+    "image_path": "/static/images/루실레드메인.jpeg",
     "answer": "루실레드메인"
   },
   {
