@@ -158,9 +158,11 @@
             document.getElementById('answerForm').classList.remove('hidden');
             document.getElementById('answerInput').focus();
 
-            // 힌트 사용 여부 초기화
+            // ✨ 힌트 초기화
             gameState.hintUsed = false;
             gameState.answered = false;
+            document.getElementById('hintText').textContent = '힌트 보기를 눌러주세요';
+            document.getElementById('confirmHintBtn').textContent = '힌트 보기';
             updateHintButton();
         }
 
