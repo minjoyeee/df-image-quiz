@@ -90,16 +90,12 @@
         <!-- 힌트 팝업 -->
         <div id="hintModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
-                <h2 class="text-xl font-bold text-gray-800 mb-4">힌트를 보시겠습니까?</h2>
+                <h2 class="text-xl font-bold text-gray-800 mb-4">힌트</h2>
                 
-                <!-- ✨ 힌트 이미 봤으면 표시 -->
-                <div id="hintDisplay" class="hidden bg-yellow-100 p-4 rounded-lg mb-6 text-center">
-                    <p class="text-sm text-gray-600 mb-2">힌트:</p>
-                    <p id="hintText" class="text-2xl font-bold text-yellow-700"></p>
+                <!-- ✨ 힌트 표시 영역 -->
+                <div id="hintDisplay" class="bg-yellow-100 p-4 rounded-lg mb-6 text-center">
+                    <p id="hintText" class="text-2xl font-bold text-yellow-700">힌트 보기를 눌러주세요</p>
                 </div>
-                
-                <!-- ✨ 아직 안 봤으면 확인 메시지 표시 -->
-                <div id="hintConfirmMsg" class="text-gray-600 mb-6">힌트를 사용하면 이 문제의 정답은 50점으로 계산됩니다.</div>
 
                 <div class="flex gap-4">
                     <button
@@ -111,7 +107,7 @@
                     </button>
                     <button
                         type="button"
-                        id="cancelHintBtn"
+                        id="closeHintBtn"
                         class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg transition"
                     >
                         닫기
@@ -229,16 +225,7 @@
 
             document.getElementById('totalScore').textContent = gameState.totalScore;
         }
-
-        // 힌트 버튼
-        document.getElementById('hintBtn').addEventListener('click', () => {
-            document.getElementById('hintModal').classList.remove('hidden');
-        });
-
-        document.getElementById('cancelHintBtn').addEventListener('click', () => {
-            document.getElementById('hintModal').classList.add('hidden');
-        });
-
+        
         // ✨ 초성 추출 함수
         function getChosungHint(text) {
             const chosung = [
@@ -259,8 +246,17 @@
             return hint;
         }
 
+        // 힌트 버튼
+        document.getElementById('hintBtn').addEventListener('click', () => {
+            document.getElementById('hintModal').classList.remove('hidden');
+        });
+
+        document.getElementById('closeHintBtn').addEventListener('click', () => {
+            document.getElementById('hintModal').classList.add('hidden');
+        });
+
         document.getElementById('confirmHintBtn').addEventListener('click', () => {
-            // 이미 힌트를 봤으면 팝업만 닫기
+            // 이미 힌트를 봤으면 팝업 닫기
             if (gameState.hintUsed) {
                 document.getElementById('hintModal').classList.add('hidden');
                 return;
@@ -276,14 +272,11 @@
             
             const hint = getChosungHint(answer);
             
-            // ✨ 힌트를 화면에 표시
+            // ✨ 힌트 표시
             document.getElementById('hintText').textContent = hint;
-            document.getElementById('hintDisplay').classList.remove('hidden');
-            document.getElementById('hintConfirmMsg').classList.add('hidden');
             document.getElementById('confirmHintBtn').textContent = '확인';
             
             gameState.hintUsed = true;
-            updateHintButton();
         });
 
         // 힌트 버튼 업데이트
