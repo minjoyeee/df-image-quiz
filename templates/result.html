@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>던파 퀴즈 - 결과</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-900 to-indigo-900 min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-md w-full">
+        <div class="bg-white rounded-lg shadow-2xl p-8">
+            <!-- 제목 -->
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-purple-600 mb-2">게임 종료!</h1>
+                <p class="text-gray-600">당신의 결과입니다</p>
+            </div>
+
+            <!-- 결과 정보 -->
+            <div class="space-y-6 mb-8">
+                <!-- 닉네임 -->
+                <div class="text-center">
+                    <p class="text-sm text-gray-600 mb-1">플레이어</p>
+                    <p id="resultNickname" class="text-2xl font-bold text-purple-600">-</p>
+                </div>
+
+                <!-- 점수 -->
+                <div class="bg-gradient-to-r from-purple-100 to-indigo-100 rounded-lg p-6 text-center">
+                    <p class="text-sm text-gray-600 mb-2">최종 점수</p>
+                    <p id="resultScore" class="text-5xl font-bold text-purple-600">0</p>
+                    <p class="text-sm text-gray-500 mt-2">최대 점수: 2,000점</p>
+                </div>
+
+                <!-- 순위 -->
+                <div class="text-center">
+                    <p class="text-sm text-gray-600 mb-1">현재 순위</p>
+                    <p id="resultRank" class="text-3xl font-bold text-indigo-600">#-</p>
+                </div>
+
+                <!-- 평가 -->
+                <div id="gradeContainer" class="bg-yellow-50 rounded-lg p-4 text-center border-2 border-yellow-200">
+                    <p id="gradeText" class="text-lg font-bold text-yellow-800">-</p>
+                </div>
+            </div>
+
+            <!-- 버튼 그룹 -->
+            <div class="space-y-3">
+                <button
+                    onclick="window.location.href = '/'"
+                    class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+                >
+                    다시 플레이
+                </button>
+                <button
+                    onclick="window.location.href = '/leaderboard'"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+                >
+                    리더보드 보기
+                </button>
+            </div>
+        </div>
+
+        <!-- 팁 -->
+        <div class="mt-8 bg-white bg-opacity-10 rounded-lg p-4 text-white text-sm">
+            <p class="font-semibold mb-2">💡 팁:</p>
+            <ul class="space-y-1 text-gray-200 text-xs">
+                <li>• 정답: 100점, 힌트 사용 후 정답: 50점</li>
+                <li>• 패스는 0점입니다</li>
+                <li>• 리더보드에 자동으로 등록됩니다</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function init() {
+            const nickname = sessionStorage.getItem('nickname') || '플레이어';
+            const finalScore = parseInt(sessionStorage.getItem('finalScore')) || 0;
+
+            document.getElementById('resultNickname').textContent = nickname;
+            document.getElementById('resultScore').textContent = finalScore.toLocaleString();
+
+            // 점수에 따른 평가
+            let grade = '';
+            if (finalScore >= 1800) {
+                grade = '🌟 완벽합니다! 던파 마스터입니다!';
+            } else if (finalScore >= 1500) {
+                grade = '⭐ 훌륭합니다! 거의 다 맞추셨어요!';
+            } else if (finalScore >= 1200) {
+                grade = '👍 잘하셨습니다! 계속 연습하세요!';
+            } else if (finalScore >= 900) {
+                grade = '😊 좋은 시도입니다!';
+            } else if (finalScore >= 600) {
+                grade = '💪 더 노력해보세요!';
+            } else {
+                grade = '🎮 다음 번에 더 잘할 수 있어요!';
+            }
+
+            document.getElementById('gradeText').textContent = grade;
+
+            // 리더보드에서 순위 찾기
+            fetch('/api/leaderboard')
+                .then(res => res.json())
+                .then(scores => {
+                    const rank = scores.findIndex(s => s.nickname === nickname && s.score === finalScore) + 1;
+                    document.getElementById('resultRank').textContent = `#${rank}`;
+                })
+                .catch(error => {
+                    console.error('리더보드 로드 실패:', error);
+                    document.getElementById('resultRank').textContent = '#-';
+                });
+
+            // 세션 스토리지 정리
+            sessionStorage.removeItem('finalScore');
+        }
+
+        init();
+    </script>
+</body>
+</html>

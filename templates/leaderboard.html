@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>던파 퀴즈 - 리더보드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-900 to-indigo-900 min-h-screen p-4">
+    <div class="max-w-2xl mx-auto">
+        <!-- 헤더 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-purple-600">리더보드</h1>
+                    <p class="text-gray-600 text-sm">전체 점수 순위</p>
+                </div>
+                <a href="/" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition">
+                    홈으로
+                </a>
+            </div>
+        </div>
+
+        <!-- 리더보드 테이블 -->
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-purple-600 text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">순위</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">닉네임</th>
+                            <th class="px-6 py-4 text-right text-sm font-semibold">점수</th>
+                            <th class="px-6 py-4 text-left text-sm font-semibold">날짜</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardBody" class="divide-y divide-gray-200">
+                        <!-- JavaScript로 채워집니다 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 데이터 없을 때 -->
+            <div id="emptyMessage" class="hidden text-center py-12">
+                <p class="text-gray-500 text-lg">아직 점수 기록이 없습니다.</p>
+                <a href="/" class="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-lg transition">
+                    게임 시작하기
+                </a>
+            </div>
+        </div>
+
+        <!-- 정보 -->
+        <div class="mt-8 bg-white bg-opacity-10 rounded-lg p-4 text-white text-sm">
+            <p class="font-semibold mb-2">📊 리더보드 정보:</p>
+            <ul class="space-y-1 text-gray-200 text-xs">
+                <li>• 상위 100명의 점수가 표시됩니다</li>
+                <li>• 같은 점수인 경우 최신 기록이 위에 표시됩니다</li>
+                <li>• 정답: 100점, 힌트 사용 후 정답: 50점</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        async function loadLeaderboard() {
+            try {
+                const response = await fetch('/api/leaderboard');
+                const scores = await response.json();
+
+                const tbody = document.getElementById('leaderboardBody');
+                const emptyMessage = document.getElementById('emptyMessage');
+
+                if (scores.length === 0) {
+                    emptyMessage.classList.remove('hidden');
+                    return;
+                }
+
+                tbody.innerHTML = scores.map((score, index) => {
+                    const date = new Date(score.created_at).toLocaleDateString('ko-KR');
+                    let rankBadge = '';
+
+                    if (index === 0) {
+                        rankBadge = '🥇';
+                    } else if (index === 1) {
+                        rankBadge = '🥈';
+                    } else if (index === 2) {
+                        rankBadge = '🥉';
+                    } else {
+                        rankBadge = `${index + 1}`;
+                    }
+
+                    return `
+                        <tr class="${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}">
+                            <td class="px-6 py-4 text-sm font-bold text-purple-600">${rankBadge}</td>
+                            <td class="px-6 py-4 text-sm font-semibold text-gray-900">${score.nickname}</td>
+                            <td class="px-6 py-4 text-sm font-bold text-right text-green-600">${score.score.toLocaleString()}</td>
+                            <td class="px-6 py-4 text-sm text-gray-600">${date}</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('리더보드 로드 실패:', error);
+                document.getElementById('emptyMessage').classList.remove('hidden');
+            }
+        }
+
+        loadLeaderboard();
+    </script>
+</body>
+</html>

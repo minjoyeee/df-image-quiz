@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>던파 퀴즈 - 게임</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-purple-900 to-indigo-900 min-h-screen p-4">
+    <div class="max-w-2xl mx-auto">
+        <!-- 헤더 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-purple-600">던파 퀴즈</h1>
+                    <p id="nicknameDisplay" class="text-gray-600 text-sm">플레이어: -</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-600">문제</p>
+                    <p id="questionCount" class="text-3xl font-bold text-purple-600">0/20</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-600">총 점수</p>
+                    <p id="totalScore" class="text-3xl font-bold text-green-600">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 게임 영역 -->
+        <div class="bg-white rounded-lg shadow-lg p-8" id="gameContainer">
+            <!-- 이미지 표시 -->
+            <div class="mb-8 flex justify-center">
+                <img id="questionImage" src="" alt="문제 이미지" class="max-w-sm max-h-96 rounded-lg shadow-md">
+            </div>
+
+            <!-- 정답 입력 폼 -->
+            <form id="answerForm" class="space-y-4">
+                <div>
+                    <label for="answerInput" class="block text-sm font-semibold text-gray-700 mb-2">
+                        정답을 입력하세요
+                    </label>
+                    <input
+                        type="text"
+                        id="answerInput"
+                        name="answer"
+                        placeholder="예: 황금거미"
+                        autocomplete="off"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition text-lg"
+                    >
+                </div>
+
+                <!-- 버튼 그룹 -->
+                <div class="flex gap-4">
+                    <button
+                        type="submit"
+                        class="flex-1 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+                    >
+                        제출
+                    </button>
+                    <button
+                        type="button"
+                        id="hintBtn"
+                        class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+                    >
+                        힌트 (50점)
+                    </button>
+                </div>
+            </form>
+
+            <!-- 피드백 메시지 -->
+            <div id="feedbackContainer" class="mt-6 hidden">
+                <div id="feedbackMessage" class="p-4 rounded-lg text-center font-bold text-lg"></div>
+                <div id="answerDisplay" class="mt-2 p-3 bg-gray-100 rounded-lg text-center text-sm text-gray-700"></div>
+                <button
+                    type="button"
+                    id="nextBtn"
+                    class="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+                >
+                    다음 문제
+                </button>
+            </div>
+        </div>
+
+        <!-- 힌트 팝업 -->
+        <div id="hintModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+                <h2 class="text-xl font-bold text-gray-800 mb-4">힌트를 보시겠습니까?</h2>
+                <p class="text-gray-600 mb-6">힌트를 사용하면 이 문제의 정답은 50점으로 계산됩니다.</p>
+                <div class="flex gap-4">
+                    <button
+                        type="button"
+                        id="confirmHintBtn"
+                        class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition"
+                    >
+                        힌트 보기
+                    </button>
+                    <button
+                        type="button"
+                        id="cancelHintBtn"
+                        class="flex-1 bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg transition"
+                    >
+                        취소
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let gameState = {
+            nickname: '',
+            questions: [],
+            currentIndex: 0,
+            totalScore: 0,
+            hintUsed: false,
+            answered: false
+        };
+
+        // 초기화
+        async function init() {
+            gameState.nickname = sessionStorage.getItem('nickname') || '플레이어';
+            document.getElementById('nicknameDisplay').textContent = `플레이어: ${gameState.nickname}`;
+
+            // 20개 문제 로드
+            try {
+                const response = await fetch('/api/questions');
+                gameState.questions = await response.json();
+                displayQuestion();
+            } catch (error) {
+                alert('문제 로드에 실패했습니다.');
+                window.location.href = '/';
+            }
+        }
+
+        // 문제 표시
+        function displayQuestion() {
+            if (gameState.currentIndex >= gameState.questions.length) {
+                endGame();
+                return;
+            }
+
+            const question = gameState.questions[gameState.currentIndex];
+            document.getElementById('questionImage').src = question.image_path;
+            document.getElementById('questionCount').textContent = `${gameState.currentIndex + 1}/20`;
+            document.getElementById('answerInput').value = '';
+            document.getElementById('feedbackContainer').classList.add('hidden');
+            document.getElementById('answerForm').classList.remove('hidden');
+            document.getElementById('answerInput').focus();
+
+            // 힌트 사용 여부 초기화
+            gameState.hintUsed = false;
+            gameState.answered = false;
+            updateHintButton();
+        }
+
+        // 정답 제출
+        document.getElementById('answerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (gameState.answered) return;
+
+            const answer = document.getElementById('answerInput').value.trim();
+
+            if (!answer) {
+                alert('정답을 입력해주세요');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/check-answer', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question_id: gameState.questions[gameState.currentIndex].id,
+                        answer: answer
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.correct) {
+                    const points = gameState.hintUsed ? 50 : 100;
+                    gameState.totalScore += points;
+                    showFeedback(true, result.answer, points);
+                } else {
+                    showFeedback(false, result.answer);
+                }
+
+                gameState.answered = true;
+            } catch (error) {
+                alert('오류가 발생했습니다');
+            }
+        });
+
+        // 피드백 표시
+        function showFeedback(isCorrect, correctAnswer, points = 0) {
+            const feedbackDiv = document.getElementById('feedbackMessage');
+            const answerDiv = document.getElementById('answerDisplay');
+
+            document.getElementById('answerForm').classList.add('hidden');
+            document.getElementById('feedbackContainer').classList.remove('hidden');
+
+            if (isCorrect) {
+                feedbackDiv.textContent = '✅ 정답입니다!';
+                feedbackDiv.className = 'p-4 rounded-lg text-center font-bold text-lg bg-green-100 text-green-800';
+                answerDiv.textContent = `+${points}점`;
+                answerDiv.className = 'mt-2 p-3 bg-green-50 rounded-lg text-center text-sm text-green-700 font-bold';
+            } else {
+                feedbackDiv.textContent = '❌ 틀렸습니다.';
+                feedbackDiv.className = 'p-4 rounded-lg text-center font-bold text-lg bg-red-100 text-red-800';
+                answerDiv.textContent = `정답: ${correctAnswer}`;
+                answerDiv.className = 'mt-2 p-3 bg-red-50 rounded-lg text-center text-sm text-red-700';
+            }
+
+            document.getElementById('totalScore').textContent = gameState.totalScore;
+        }
+
+        // 힌트 버튼
+        document.getElementById('hintBtn').addEventListener('click', () => {
+            document.getElementById('hintModal').classList.remove('hidden');
+        });
+
+        document.getElementById('cancelHintBtn').addEventListener('click', () => {
+            document.getElementById('hintModal').classList.add('hidden');
+        });
+
+        document.getElementById('confirmHintBtn').addEventListener('click', () => {
+            const question = gameState.questions[gameState.currentIndex];
+            const answer = question.answer;
+            const hint = answer.charAt(0) + '*'.repeat(answer.length - 1);
+
+            alert(`힌트: ${hint}`);
+            gameState.hintUsed = true;
+            document.getElementById('hintModal').classList.add('hidden');
+            updateHintButton();
+        });
+
+        // 힌트 버튼 업데이트
+        function updateHintButton() {
+            const hintBtn = document.getElementById('hintBtn');
+            if (gameState.hintUsed) {
+                hintBtn.disabled = true;
+                hintBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                hintBtn.disabled = false;
+                hintBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // 다음 문제
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            gameState.currentIndex++;
+            displayQuestion();
+        });
+
+        // ✨ Enter 키로도 다음 문제 이동
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !document.getElementById('feedbackContainer').classList.contains('hidden')) {
+                if (!document.getElementById('nextBtn').disabled) {
+                    gameState.currentIndex++;
+                    displayQuestion();
+                }
+            }
+        });
+
+        // 게임 종료
+        async function endGame() {
+            try {
+                await fetch('/api/save-score', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nickname: gameState.nickname,
+                        score: gameState.totalScore
+                    })
+                });
+
+                sessionStorage.setItem('finalScore', gameState.totalScore);
+                window.location.href = '/result';
+            } catch (error) {
+                alert('점수 저장에 실패했습니다');
+            }
+        }
+
+        // 게임 시작
+        init();
+    </script>
+</body>
+</html>
