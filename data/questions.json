@@ -2,7 +2,7 @@
   {
     "id": 1,
     "image_path": "/static/images/test.png",
-    "answer": "귀검사"
+    "answer": "솔도로스"
   },
   {
     "id": 2,
@@ -12,7 +12,7 @@
   {
     "id": 3,
     "image_path": "/static/images/test.png",
-    "answer": "학자의토시"
+    "answer": "단진"
   },
   {
     "id": 4,
@@ -22,7 +22,7 @@
   {
     "id": 5,
     "image_path": "/static/images/test.png",
-    "answer": "로드오브레인저"
+    "answer": "루실레드메인"
   },
   {
     "id": 6,
@@ -37,81 +37,81 @@
   {
     "id": 8,
     "image_path": "/static/images/test.png",
-    "answer": "오디움"
+    "answer": "카인"
   },
   {
     "id": 9,
     "image_path": "/static/images/test.png",
-    "answer": "아바돈"
+    "answer": "힐더"
   },
   {
     "id": 10,
     "image_path": "/static/images/test.png",
-    "answer": "데빌메이크라이"
+    "answer": "아니마"
   },
   {
     "id": 11,
     "image_path": "/static/images/test.png",
-    "answer": "검은빛귀"
+    "answer": "황녀에르제"
   },
   {
     "id": 12,
     "image_path": "/static/images/test.png",
-    "answer": "타락한천사"
+    "answer": "주베닐"
   },
   {
     "id": 13,
     "image_path": "/static/images/test.png",
-    "answer": "헬머신"
+    "answer": "초붕"
   },
   {
     "id": 14,
     "image_path": "/static/images/test.png",
-    "answer": "흑마법사"
+    "answer": "민타이"
   },
   {
     "id": 15,
     "image_path": "/static/images/test.png",
-    "answer": "죽음의기사"
+    "answer": "그란디스그라시아"
   },
   {
     "id": 16,
     "image_path": "/static/images/test.png",
-    "answer": "베른하르드"
+    "answer": "슈시아"
   },
   {
     "id": 17,
     "image_path": "/static/images/test.png",
-    "answer": "로렌"
+    "answer": "세리아"
   },
   {
     "id": 18,
     "image_path": "/static/images/test.png",
-    "answer": "헬토피아"
+    "answer": "게시판"
   },
   {
     "id": 19,
     "image_path": "/static/images/test.png",
-    "answer": "카인"
+    "answer": "운라이오닐"
   },
   {
     "id": 20,
     "image_path": "/static/images/test.png",
-    "answer": "에바"
+    "answer": "바칼"
   },
   {
     "id": 21,
     "image_path": "/static/images/test.png",
-    "answer": "아크"
+    "answer": "진룡이트레녹"
   },
   {
     "id": 22,
     "image_path": "/static/images/test.png",
-    "answer": "베아르"
+    "answer": "백녹의시슬레"
   },
   {
     "id": 23,
     "image_path": "/static/images/test.png",
-    "answer": "아이샤"
+    "answer": "루브라"
   }
 ]
