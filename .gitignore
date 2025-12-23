@@ -1,0 +1,46 @@
+# 환경 변수
+.env
+.env.local
+
+# 키페어 파일 (절대 git에 올리지 말 것!)
+*.pem
+df-image-quiz.pem
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+df_venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 데이터 (선택사항 - 로컬 테스트 데이터만)
+# data/scores.json
