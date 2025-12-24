@@ -68,11 +68,17 @@ def check_answer():
     if not question:
         return jsonify({'error': '질문을 찾을 수 없습니다'}), 404
     
-    # 띄어쓰기 무시하고 비교
-    correct_answer = question['answer'].replace(' ', '')
+    # ✨ 정답 + 동의어 모두 확인
+    answers_to_check = [question['answer']]
+    if 'aliases' in question:
+        answers_to_check.extend(question['aliases'])
+
     user_answer_normalized = user_answer.replace(' ', '')
-    
-    is_correct = correct_answer == user_answer_normalized
+
+    is_correct = any(
+        ans.replace(' ', '') == user_answer_normalized 
+        for ans in answers_to_check
+    )
     
     return jsonify({
         'correct': is_correct,
