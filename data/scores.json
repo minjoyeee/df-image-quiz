@@ -1,5 +1,29 @@
 [
   {
+    "id": 6,
+    "nickname": "픵픵",
+    "score": 1700,
+    "created_at": "2025-12-24 07:03:55"
+  },
+  {
+    "id": 4,
+    "nickname": "broadsniper",
+    "score": 1200,
+    "created_at": "2025-12-24 06:53:42"
+  },
+  {
+    "id": 3,
+    "nickname": "카이잔",
+    "score": 1000,
+    "created_at": "2025-12-24 06:50:52"
+  },
+  {
+    "id": 5,
+    "nickname": "운망겜 던파",
+    "score": 600,
+    "created_at": "2025-12-24 06:59:40"
+  },
+  {
     "id": 1,
     "nickname": "테라나이트",
     "score": 300,
