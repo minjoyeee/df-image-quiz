@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>던파 퀴즈 - 리더보드</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .rank-medal {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            font-size: 28px;
+            line-height: 40px;
+            text-align: center;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .rank-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body class="bg-gradient-to-br from-purple-900 to-indigo-900 min-h-screen p-4">
     <div class="max-w-2xl mx-auto">
@@ -78,13 +102,13 @@
                     let rankBadge = '';
 
                     if (index === 0) {
-                        rankBadge = '🥇';
+                        rankBadge = '<span class="rank-medal">🥇</span>';
                     } else if (index === 1) {
-                        rankBadge = '🥈';
+                        rankBadge = '<span class="rank-medal">🥈</span>';
                     } else if (index === 2) {
-                        rankBadge = '🥉';
+                        rankBadge = '<span class="rank-medal">🥉</span>';
                     } else {
-                        rankBadge = `${index + 1}`;
+                        rankBadge = `<span class="rank-number">${index + 1}</span>`;
                     }
 
                     return `
