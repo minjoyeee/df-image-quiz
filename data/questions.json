@@ -113,5 +113,65 @@
     "id": 23,
     "image_path": "/static/images/루브라.jpeg",
     "answer": "루브라"
+  },
+  {
+    "id": 24,
+    "image_path": "/static/images/엘리브.png",
+    "answer": "엘리브"
+  },
+  {
+    "id": 25,
+    "image_path": "/static/images/세니르.png",
+    "answer": "세니르"
+  },
+  {
+    "id": 26,
+    "image_path": "/static/images/엘디르.png",
+    "answer": "엘디르 "
+  },
+  {
+    "id": 27,
+    "image_path": "/static/images/카밀라.png",
+    "answer": "카밀라"
+  },
+  {
+    "id": 28,
+    "image_path": "/static/images/최후의테아나.png",
+    "answer": "최후의테아나"
+  },
+  {
+    "id": 29,
+    "image_path": "/static/images/옴마.jpeg",
+    "answer": "옴마 "
+  },
+  {
+    "id": 30,
+    "image_path": "/static/images/셀게이퍼.png",
+    "answer": "셀게이퍼"
+  },
+  {
+    "id": 31,
+    "image_path": "/static/images/베니부.jpeg",
+    "answer": "베니부"
+  },
+  {
+    "id": 32,
+    "image_path": "/static/images/녹스.jpeg",
+    "answer": "녹스 "
+  },
+  {
+    "id": 33,
+    "image_path": "/static/images/박종민.jpeg",
+    "answer": "박종민"
+  },
+  {
+    "id": 34,
+    "image_path": "/static/images/록시.png",
+    "answer": "록시  "
+  },
+  {
+    "id": 35,
+    "image_path": "/static/images/로즈베리론.png",
+    "answer": "로즈베리론"
   }
 ]
