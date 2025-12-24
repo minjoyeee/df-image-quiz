@@ -17,7 +17,8 @@
   {
     "id": 4,
     "image_path": "/static/images/관리자베르데.png",
-    "answer": "관리자베르데"
+    "answer": "관리자베르데",
+    "aliases" : ["베르데"]
   },
   {
     "id": 5,
@@ -32,7 +33,8 @@
   {
     "id": 7,
     "image_path": "/static/images/룬디어.jpeg",
-    "answer": "룬디어"
+    "answer": "룬디어",
+    "aliases" : ["선별자룬디어"]
   },
   {
     "id": 8,
@@ -52,7 +54,8 @@
   {
     "id": 11,
     "image_path": "/static/images/황녀에르제.jpeg",
-    "answer": "황녀에르제"
+    "answer": "황녀에르제",
+    "aliases" : ["에르제"]
   },
   {
     "id": 12,
@@ -82,7 +85,8 @@
   {
     "id": 17,
     "image_path": "/static/images/세리아.jpeg",
-    "answer": "세리아"
+    "answer": "세리아",
+    "aliases" : ["세리아키르민"]
   },
   {
     "id": 18,
@@ -102,7 +106,8 @@
   {
     "id": 21,
     "image_path": "/static/images/진룡이트레녹.jpeg",
-    "answer": "진룡이트레녹"
+    "answer": "진룡이트레녹",
+    "aliases" : ["이이트레녹"]
   },
   {
     "id": 22,
@@ -112,7 +117,8 @@
   {
     "id": 23,
     "image_path": "/static/images/루브라.jpeg",
-    "answer": "루브라"
+    "answer": "루브라",
+    "aliases" : ["모독의 루브라"]
   },
   {
     "id": 24,
