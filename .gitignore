@@ -48,3 +48,4 @@ Thumbs.db
 # 배포 스크립트 (로컬 전용)
 deploy.bat
 reset-leaderboard.bat
+delete-score.bat
